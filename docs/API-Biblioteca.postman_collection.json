@@ -1,0 +1,86 @@
+{
+  "info": {
+    "name": "API Biblioteca - Web III",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [ { "key": "token", "value": "{{token}}", "type": "string" } ]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [ { "listen": "test", "script": { "exec": [
+            "const r = pm.response.json();",
+            "if (r.token) pm.collectionVariables.set('token', r.token);"
+          ] } } ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@exemplo.com\",\n  \"password\": \"password123\"\n}" },
+            "url": "{{base_url}}/login"
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Novo Usuário\",\n  \"email\": \"novo@exemplo.com\",\n  \"password\": \"senha1234\"\n}" },
+            "url": "{{base_url}}/register"
+          }
+        },
+        { "name": "Me", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/me" } },
+        { "name": "Logout", "request": { "method": "POST", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/logout" } }
+      ]
+    },
+    {
+      "name": "Autores",
+      "item": [
+        { "name": "Listar", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/autores" } },
+        { "name": "Buscar", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/autores/1" } },
+        { "name": "Cadastrar", "request": { "method": "POST", "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Cecília Meireles\",\n  \"nacionalidade\": \"Brasileira\",\n  \"nascimento\": \"1901-11-07\",\n  \"biografia\": \"Poeta e educadora.\"\n}" }, "url": "{{base_url}}/autores" } },
+        { "name": "Atualizar", "request": { "method": "PUT", "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{\n  \"biografia\": \"Biografia atualizada.\"\n}" }, "url": "{{base_url}}/autores/1" } },
+        { "name": "Remover", "request": { "method": "DELETE", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/autores/4" } }
+      ]
+    },
+    {
+      "name": "Categorias",
+      "item": [
+        { "name": "Listar", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/categorias" } },
+        { "name": "Buscar", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/categorias/1" } },
+        { "name": "Cadastrar", "request": { "method": "POST", "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Conto\",\n  \"descricao\": \"Narrativas curtas.\"\n}" }, "url": "{{base_url}}/categorias" } },
+        { "name": "Atualizar", "request": { "method": "PUT", "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{\n  \"descricao\": \"Descrição atualizada.\"\n}" }, "url": "{{base_url}}/categorias/1" } },
+        { "name": "Remover", "request": { "method": "DELETE", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/categorias/3" } }
+      ]
+    },
+    {
+      "name": "Livros",
+      "item": [
+        { "name": "Listar (com autor e categoria)", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/livros" } },
+        { "name": "Buscar", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/livros/1" } },
+        { "name": "Cadastrar", "request": { "method": "POST", "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{\n  \"titulo\": \"Quincas Borba\",\n  \"isbn\": \"000-00-0000-005-0\",\n  \"anopublicacao\": 1891,\n  \"descricao\": \"Romance da fase realista.\",\n  \"paginas\": 320,\n  \"idautor\": 1,\n  \"idcategoria\": 1\n}" }, "url": "{{base_url}}/livros" } },
+        { "name": "Atualizar", "request": { "method": "PUT", "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{\n  \"paginas\": 300\n}" }, "url": "{{base_url}}/livros/1" } },
+        { "name": "Remover", "request": { "method": "DELETE", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/livros/5" } }
+      ]
+    },
+    {
+      "name": "Usuários",
+      "item": [
+        { "name": "Listar", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/usuarios" } },
+        { "name": "Buscar", "request": { "method": "GET", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/usuarios/1" } },
+        { "name": "Atualizar", "request": { "method": "PUT", "header": [ { "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" } ], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Admin Atualizado\"\n}" }, "url": "{{base_url}}/usuarios/1" } },
+        { "name": "Remover", "request": { "method": "DELETE", "header": [ { "key": "Accept", "value": "application/json" } ], "url": "{{base_url}}/usuarios/2" } }
+      ]
+    }
+  ]
+}
