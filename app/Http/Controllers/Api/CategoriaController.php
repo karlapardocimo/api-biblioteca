@@ -9,19 +9,19 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    // GET /api/categorias
+ 
     public function index(): JsonResponse
     {
         return response()->json(Categoria::orderBy('nome')->get());
     }
 
-    // GET /api/categorias/{id}
+
     public function show(Categoria $categoria): JsonResponse
     {
         return response()->json($categoria->load('livros.autor'));
     }
 
-    // POST /api/categorias
+    
     public function store(Request $request): JsonResponse
     {
         $dados = $request->validate($this->regras());
@@ -30,7 +30,7 @@ class CategoriaController extends Controller
         return response()->json($categoria, 201);
     }
 
-    // PUT /api/categorias/{id}
+
     public function update(Request $request, Categoria $categoria): JsonResponse
     {
         $dados = $request->validate($this->regras(true));
@@ -39,7 +39,7 @@ class CategoriaController extends Controller
         return response()->json($categoria->fresh());
     }
 
-    // DELETE /api/categorias/{id}
+
     public function destroy(Categoria $categoria): JsonResponse
     {
         if ($categoria->livros()->exists()) {

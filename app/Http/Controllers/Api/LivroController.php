@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 
 class LivroController extends Controller
 {
-    // GET /api/livros  (filtros opcionais: ?idautor=1&idcategoria=2)
+
     public function index(Request $request): JsonResponse
     {
         $livros = Livro::with(['autor', 'categoria'])
@@ -22,13 +22,13 @@ class LivroController extends Controller
         return response()->json($livros);
     }
 
-    // GET /api/livros/{id}
+   
     public function show(Livro $livro): JsonResponse
     {
         return response()->json($livro->load(['autor', 'categoria']));
     }
 
-    // POST /api/livros
+
     public function store(Request $request): JsonResponse
     {
         $dados = $request->validate($this->regras());
@@ -37,7 +37,7 @@ class LivroController extends Controller
         return response()->json($livro->load(['autor', 'categoria']), 201);
     }
 
-    // PUT /api/livros/{id}
+
     public function update(Request $request, Livro $livro): JsonResponse
     {
         $dados = $request->validate($this->regras($livro));
@@ -46,7 +46,7 @@ class LivroController extends Controller
         return response()->json($livro->fresh(['autor', 'categoria']));
     }
 
-    // DELETE /api/livros/{id}
+ 
     public function destroy(Livro $livro): JsonResponse
     {
         $livro->delete();

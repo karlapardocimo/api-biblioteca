@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // POST /api/register
+
     public function register(Request $request): JsonResponse
     {
         $dados = $request->validate([
@@ -29,7 +29,7 @@ class AuthController extends Controller
         ], 201);
     }
 
-    // POST /api/login
+    
     public function login(Request $request): JsonResponse
     {
         $dados = $request->validate([
@@ -52,13 +52,13 @@ class AuthController extends Controller
         ]);
     }
 
-    // GET /api/me
+
     public function me(Request $request): JsonResponse
     {
         return response()->json($request->user());
     }
 
-    // POST /api/logout
+
     public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();

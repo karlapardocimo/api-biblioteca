@@ -17,12 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        // Toda rota /api/* responde erros em JSON (401, 404, 422...)
+       
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request, Throwable $e) => $request->is('api/*') || $request->expectsJson()
         );
 
-        // Mensagem amigável para registro/rota inexistente
+      
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json(['message' => 'Registro ou rota não encontrado.'], 404);

@@ -9,19 +9,19 @@ use Illuminate\Http\Request;
 
 class AutorController extends Controller
 {
-    // GET /api/autores
+
     public function index(): JsonResponse
     {
         return response()->json(Autor::orderBy('nome')->get());
     }
 
-    // GET /api/autores/{id}
+ 
     public function show(Autor $autor): JsonResponse
     {
         return response()->json($autor->load('livros.categoria'));
     }
 
-    // POST /api/autores
+   
     public function store(Request $request): JsonResponse
     {
         $dados = $request->validate($this->regras());
@@ -30,7 +30,7 @@ class AutorController extends Controller
         return response()->json($autor, 201);
     }
 
-    // PUT /api/autores/{id}
+  
     public function update(Request $request, Autor $autor): JsonResponse
     {
         $dados = $request->validate($this->regras(true));
@@ -39,7 +39,7 @@ class AutorController extends Controller
         return response()->json($autor->fresh());
     }
 
-    // DELETE /api/autores/{id}
+
     public function destroy(Autor $autor): JsonResponse
     {
         if ($autor->livros()->exists()) {

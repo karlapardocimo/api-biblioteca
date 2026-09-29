@@ -10,19 +10,19 @@ use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
 {
-    // GET /api/usuarios
+
     public function index(): JsonResponse
     {
         return response()->json(User::orderBy('name')->get());
     }
 
-    // GET /api/usuarios/{id}
+  
     public function show(User $usuario): JsonResponse
     {
         return response()->json($usuario);
     }
 
-    // POST /api/usuarios
+
     public function store(Request $request): JsonResponse
     {
         $dados = $request->validate([
@@ -34,7 +34,7 @@ class UsuarioController extends Controller
         return response()->json(User::create($dados), 201);
     }
 
-    // PUT /api/usuarios/{id}
+   
     public function update(Request $request, User $usuario): JsonResponse
     {
         $dados = $request->validate([
@@ -48,7 +48,6 @@ class UsuarioController extends Controller
         return response()->json($usuario->fresh());
     }
 
-    // DELETE /api/usuarios/{id}
     public function destroy(User $usuario): JsonResponse
     {
         $usuario->tokens()->delete();
