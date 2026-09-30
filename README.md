@@ -6,6 +6,7 @@ Aluna: Karla Pardocimo
 
 ## Sobre o trabalho
 
+API publicada: https://api-biblioteca-production-iogz2l.laravel.cloud/api/livros
 API REST feita em Laravel para cadastrar livros, autores, categorias e usuários.
 Os dados ficam em um banco MySQL e as tabelas foram criadas com migrations.
 
@@ -20,7 +21,7 @@ públicas, mas para cadastrar, alterar ou excluir é preciso fazer login e usar 
 - PHP
 - Laravel
 - MySQL
-- Laravel Sanctum
+- Laravel
 
 ## Como rodar
 
